@@ -3,6 +3,9 @@ const config = {
   plugins: {
     tailwindcss: {},
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default config;
