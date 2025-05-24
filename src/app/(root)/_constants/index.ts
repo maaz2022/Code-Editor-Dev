@@ -13,6 +13,8 @@ type LanguageConfig = Record<
   }
 >;
 
+type ThemeBase = "vs-dark" | "vs-light" | "hc-black";
+
 export const LANGUAGE_CONFIG: LanguageConfig = {
   javascript: {
     id: "javascript",
@@ -346,7 +348,7 @@ export const THEMES: Theme[] = [
 
 export const THEME_DEFINITONS = {
   "github-dark": {
-    base: "vs-dark",
+    base: "vs-dark" as const,
     inherit: true,
     rules: [
       { token: "comment", foreground: "6e7681" },
@@ -370,7 +372,7 @@ export const THEME_DEFINITONS = {
     },
   },
   monokai: {
-    base: "vs-dark",
+    base: "vs-dark" as const,
     inherit: true,
     rules: [
       { token: "comment", foreground: "75715E" },
@@ -394,7 +396,7 @@ export const THEME_DEFINITONS = {
     },
   },
   "solarized-dark": {
-    base: "vs-dark",
+    base: "vs-dark" as const,
     inherit: true,
     rules: [
       { token: "comment", foreground: "586e75" },
