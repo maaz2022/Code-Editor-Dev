@@ -2,7 +2,7 @@
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
-import { Editor } from "@monaco-editor/react";
+import { Editor, OnMount } from "@monaco-editor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
@@ -21,7 +21,9 @@ function EditorPanel() {
   useEffect(() => {
     const savedCode = localStorage.getItem(`editor-code-${language}`);
     const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode;
-    if (editor) editor.setValue(newCode);
+    if (editor) {
+      editor.getModel()?.setValue(newCode);
+    }
   }, [language, editor]);
 
   useEffect(() => {
@@ -31,7 +33,9 @@ function EditorPanel() {
 
   const handleRefresh = () => {
     const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
-    if (editor) editor.setValue(defaultCode);
+    if (editor) {
+      editor.getModel()?.setValue(defaultCode);
+    }
     localStorage.removeItem(`editor-code-${language}`);
   };
 
@@ -113,7 +117,9 @@ function EditorPanel() {
               onChange={handleEditorChange}
               theme={theme}
               beforeMount={defineMonacoThemes}
-              onMount={(editor) => setEditor(editor)}
+              onMount={(editor) => {
+                setEditor(editor);
+              }}
               options={{
                 minimap: { enabled: false },
                 fontSize,
